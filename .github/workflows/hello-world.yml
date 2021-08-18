@@ -3,6 +3,22 @@ on: push
 jobs:
   my-job:
     runs-on: ubuntu-latest
+    container: gradle: grade:6-jdk11
     steps:
       - name: my-step
-        run: echo "Hello World!"
+          run: actions/checkout@v2
+
+      - name: my-step2
+        run: ci/build-app.sh
+
+      - name: test-step
+        run: ci/unit-test-app.sh
+
+      - name: Upload Repo
+        uses: actions/upload-name@v2
+        with: 
+          name: code
+          path: .
+
+
+
